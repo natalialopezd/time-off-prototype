@@ -7,7 +7,7 @@ const BackToTasksButton = () => {
   return (
     <button
       onClick={() => navigate('/')}
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 rounded-full bg-accent text-on-accent text-p2 font-medium shadow-lg hover:bg-accent-hover transition-colors"
+      className="fixed top-4 right-6 z-50 flex items-center gap-2 px-4 py-2.5 rounded-full bg-accent text-on-accent text-p2 font-medium shadow-lg hover:bg-accent-hover transition-colors"
     >
       <svg width={14} height={14} viewBox="0 0 16 16" fill="none">
         <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
