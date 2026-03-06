@@ -13,14 +13,18 @@ function TaskRedirect() {
   const [params] = useSearchParams()
   const task = params.get('task')
   if (task === '1') return <Navigate to="/overview" replace />
-  if (task === '2' || task === '3') return <Navigate to="/members" replace />
+  if (task === '2') return <Navigate to="/overview?entry=active" replace />
+  if (task === '3') return <Navigate to="/overview?entry=active" replace />
   return <LandingPage />
 }
 
 function ConsoleLayout() {
   const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+  const entryParam = searchParams.get('entry')
+
   const initialStatusRef = useRef<ModuleStatus>(
-    location.pathname === '/members' ? 'active' : 'trial-active'
+    entryParam === 'active' ? 'active' : 'trial-active'
   )
 
   return (
