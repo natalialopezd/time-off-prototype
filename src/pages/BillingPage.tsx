@@ -36,10 +36,10 @@ export const BillingPage = () => {
   const { state } = useModuleState()
   const { usedSeats, totalSeats } = useAccess()
   const [activeTab] = useState<TabId>('overview')
-  const memberCount = state.subscribedMemberCount ?? 10
+  const billedSeats = usedSeats
 
   const { currentYearly, modulePricePerUserMonthly, renewalDate } = SUBSCRIPTION
-  const timeOffYearly = memberCount * modulePricePerUserMonthly * 12
+  const timeOffYearly = billedSeats * modulePricePerUserMonthly * 12
   const newTotal = currentYearly + timeOffYearly
 
   const isModuleVisible = state.status === 'trial-active' || state.status === 'active' || state.status === 'cancelled'

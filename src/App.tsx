@@ -1,13 +1,13 @@
-import { HashRouter, Routes, Route, Navigate, Outlet, useSearchParams } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate, Outlet, useSearchParams, useLocation } from 'react-router-dom'
+import { useRef } from 'react'
 import { ToastProvider } from './components/ui/Toast'
-import { ModuleProvider } from './store/moduleState'
+import { ModuleProvider, type ModuleStatus } from './store/moduleState'
 import { AccessProvider } from './store/accessStore'
 import { Shell } from './components/layout/Shell'
 import { LandingPage } from './pages/LandingPage'
 import { OverviewPage } from './pages/OverviewPage'
 import { MembersPage } from './pages/MembersPage'
 import { BillingPage } from './pages/BillingPage'
-import type { ReactNode } from 'react'
 
 function TaskRedirect() {
   const [params] = useSearchParams()
@@ -17,25 +17,16 @@ function TaskRedirect() {
   return <LandingPage />
 }
 
-function WithShell({ children }: { children: ReactNode }) {
-  return <Shell>{children}</Shell>
-}
-
-function Task1Layout() {
-  return (
-    <ModuleProvider initialStatus="trial-active">
-      <AccessProvider>
-        <WithShell><Outlet /></WithShell>
-      </AccessProvider>
-    </ModuleProvider>
+function ConsoleLayout() {
+  const location = useLocation()
+  const initialStatusRef = useRef<ModuleStatus>(
+    location.pathname === '/members' ? 'active' : 'trial-active'
   )
-}
 
-function MembersRoute() {
   return (
-    <ModuleProvider initialStatus="active">
+    <ModuleProvider initialStatus={initialStatusRef.current}>
       <AccessProvider>
-        <WithShell><MembersPage /></WithShell>
+        <Shell><Outlet /></Shell>
       </AccessProvider>
     </ModuleProvider>
   )
@@ -47,11 +38,11 @@ export default function App() {
       <ToastProvider>
         <Routes>
           <Route path="/" element={<TaskRedirect />} />
-          <Route element={<Task1Layout />}>
+          <Route element={<ConsoleLayout />}>
             <Route path="/overview" element={<OverviewPage />} />
             <Route path="/billing" element={<BillingPage />} />
+            <Route path="/members" element={<MembersPage />} />
           </Route>
-          <Route path="/members" element={<MembersRoute />} />
         </Routes>
       </ToastProvider>
     </HashRouter>
