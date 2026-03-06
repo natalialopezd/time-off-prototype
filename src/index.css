@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  /* Typography scale */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-size-h1: 1.75rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h3: 1.25rem;
+  --font-size-h4: 1rem;
+  --font-size-h5: 0.875rem;
+  --font-size-h6: 0.75rem;
+  --font-size-p1: 0.875rem;
+  --font-size-p2: 0.75rem;
+
+  /* Colors - Light mode */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F5F5F5;
+  --color-bg-tertiary: #EBEBEB;
+  --color-bg-muted: #F0EAFC;
+  --color-bg-accent: #412A6A;
+  --color-bg-accent-hover: #5B3D94;
+  --color-bg-success: #E8F5E9;
+  --color-bg-warning: #FFF3E0;
+  --color-bg-destructive: #D32F2F;
+  --color-bg-destructive-hover: #B71C1C;
+  --color-bg-overlay: rgba(0,0,0,0.5);
+  --color-bg-sidebar: #2C1338;
+  --color-bg-sidebar-hover: #3D1F4D;
+  --color-bg-nav: #1A0A24;
+
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #999999;
+  --color-text-accent: #412A6A;
+  --color-text-accent-hover: #5B3D94;
+  --color-text-on-accent: #FFFFFF;
+  --color-text-success: #2E7D32;
+  --color-text-warning: #E65100;
+  --color-text-destructive: #D32F2F;
+  --color-text-on-sidebar: #FFFFFF;
+  --color-text-sidebar-muted: rgba(255,255,255,0.6);
+
+  --color-border-primary: #E0E0E0;
+  --color-border-secondary: #EBEBEB;
+  --color-border-accent: #412A6A;
+
+  --color-badge-success-bg: #E8F5E9;
+  --color-badge-success-text: #2E7D32;
+  --color-badge-warning-bg: #FFF3E0;
+  --color-badge-warning-text: #E65100;
+  --color-badge-passive-bg: #F5F5F5;
+  --color-badge-passive-text: #666666;
+  --color-badge-default-bg: #F0EAFC;
+  --color-badge-default-text: #412A6A;
+}
+
+/* Base styles */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  background: var(--color-bg-secondary);
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
