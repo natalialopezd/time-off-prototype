@@ -18,7 +18,7 @@ import { ThreeDotsMenu } from '../components/ui/ThreeDotsMenu'
 
 const MODULE_INFO = {
   name: 'Time Off',
-  price: '$12/user/year',
+  price: '$2/user/month',
   badgeLabel: 'Free trial available',
   description: 'The simplest way to track vacations, sick days, and any type of leave, all from inside Toggl Tools.',
   features: [

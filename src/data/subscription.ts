@@ -1,6 +1,6 @@
 export const SUBSCRIPTION = {
   currentYearly: 2592,
-  modulePricePerUserMonthly: 24,
+  modulePricePerUserMonthly: 2,
   renewalDate: 'March 1, 2026',
   daysRemainingInPeriod: 2,
 }
