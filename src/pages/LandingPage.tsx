@@ -16,8 +16,8 @@ const tasks = [
   },
   {
     id: 3,
-    title: 'Task 3: Manage access for multiple users',
-    description: 'Your team is growing and several people need Time Off access. Find a way to add multiple users to the module at once.',
+    title: 'Task 3: Give multiple people access',
+    description: 'You want to give 5 additional people in your organization access to Time Off. Go ahead and do that.',
     path: '/members',
   },
 ]
