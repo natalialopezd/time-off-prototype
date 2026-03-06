@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useState, type ReactNode } from 'react'
 import { MEMBERS } from '../data/members'
 
-const DEFAULT_NO_ACCESS = new Set([3001, 3007])
+const DEFAULT_NO_ACCESS = new Set([3001, 3007, 3004, 3010])
 
 function defaultAccess(userId: number): boolean {
   return !DEFAULT_NO_ACCESS.has(userId)
@@ -37,7 +37,7 @@ export function AccessProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const usedSeats = MEMBERS.filter(m => accessMap[m.id] ?? defaultAccess(m.id)).length
-  const totalSeats = MEMBERS.length
+  const totalSeats = 8
 
   return (
     <AccessContext.Provider value={{ getAccess, setAccess, setBulkAccess, usedSeats, totalSeats }}>

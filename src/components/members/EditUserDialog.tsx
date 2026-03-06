@@ -90,8 +90,12 @@ export const EditUserDialog = ({ user, open, onOpenChange }: Props) => {
 
   const handleScrollToSection = useCallback((id: SectionId) => {
     const el = sectionRefs.current[id]
-    if (el && contentRef.current) {
-      contentRef.current.scrollTo({ top: el.offsetTop - 16, behavior: 'smooth' })
+    const container = contentRef.current
+    if (el && container) {
+      const containerRect = container.getBoundingClientRect()
+      const elRect = el.getBoundingClientRect()
+      const scrollTop = container.scrollTop + (elRect.top - containerRect.top) - 16
+      container.scrollTo({ top: scrollTop, behavior: 'smooth' })
     }
     setActiveSection(id)
   }, [])
@@ -122,8 +126,8 @@ export const EditUserDialog = ({ user, open, onOpenChange }: Props) => {
   const getMessage = (): string | null => {
     if (!hasChanged) return null
     if (!enabled && isTrial) return `${firstName} will lose access to Time Off after you save.`
-    if (!enabled && isPaid) return `${firstName} will lose access to Time Off after you save. This will free up 1 seat \u2022 ${usedSeats}/${totalSeats} seats used`
-    if (enabled && isPaid) return `${firstName} will gain access to Time Off after you save. This will increase your seat count \u2022 ${usedSeats}/${totalSeats} seats used`
+    if (!enabled && isPaid) return `${firstName} will lose access to Time Off after you save. This will free up 1 seat \u2022 ${usedSeats - 1}/${totalSeats} seats used`
+    if (enabled && isPaid) return `${firstName} will gain access to Time Off after you save. This will increase your seat count \u2022 ${usedSeats + 1}/${totalSeats} seats used`
     if (enabled && isTrial) return `${firstName} will gain access to Time Off after you save.`
     return null
   }
@@ -149,12 +153,12 @@ export const EditUserDialog = ({ user, open, onOpenChange }: Props) => {
     >
       <div
         className="bg-surface rounded-xl shadow-xl flex flex-col"
-        style={{ width: 720, maxWidth: 'calc(100vw - 32px)', maxHeight: '90vh' }}
+        style={{ width: 960, maxWidth: 'calc(100vw - 64px)', height: '80vh', maxHeight: 700 }}
       >
         {/* Two-panel body */}
         <div className="flex flex-1 min-h-0">
           {/* Left navigation panel */}
-          <div className="w-[200px] shrink-0 bg-surface-secondary rounded-l-xl border-r border-edge flex flex-col overflow-y-auto">
+          <div className="w-[240px] shrink-0 bg-surface-secondary rounded-l-xl border-r border-edge flex flex-col overflow-y-auto">
             {/* User info */}
             <div className="p-4 flex flex-col items-center gap-2 border-b border-edge">
               <Avatar name={user.name} size={64} />
@@ -359,7 +363,7 @@ export const EditUserDialog = ({ user, open, onOpenChange }: Props) => {
                       <Switch checked={enabled} onCheckedChange={setEnabled} />
                     </div>
                     {getMessage() && (
-                      <p className="text-p2 text-content-secondary mt-3">{getMessage()}</p>
+                      <p className={`text-p2 mt-3 ${enabled && isPaid && usedSeats + 1 > totalSeats ? 'text-warning' : 'text-content-secondary'}`}>{getMessage()}</p>
                     )}
                   </div>
                 </>
