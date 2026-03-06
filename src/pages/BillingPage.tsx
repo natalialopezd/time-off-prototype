@@ -9,12 +9,25 @@ import { IconTimeOff } from '../components/icons'
 import { ThreeDotsMenu } from '../components/ui/ThreeDotsMenu'
 import { TrackLogo, FocusLogo, WorkLogo } from '../components/icons'
 
-const IconInformation = ({ size = 16, className = '' }: { size?: number; className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={className}>
-    <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
-    <path d="M8 7v4M8 5.5v-.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-  </svg>
+const Tooltip = ({ children, text }: { children: React.ReactNode; text: string }) => (
+  <span className="relative group/tooltip inline-flex cursor-help">
+    {children}
+    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 rounded-lg bg-nav text-on-sidebar text-p2 whitespace-nowrap opacity-0 pointer-events-none group-hover/tooltip:opacity-100 transition-opacity z-50 shadow-lg">
+      {text}
+    </span>
+  </span>
 )
+
+const InfoIcon = ({ size = 16, className = '', tooltip }: { size?: number; className?: string; tooltip?: string }) => {
+  const icon = (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={className}>
+      <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M8 7v4M8 5.5v-.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+  if (tooltip) return <Tooltip text={tooltip}>{icon}</Tooltip>
+  return icon
+}
 
 type TabId = 'overview' | 'details' | 'history'
 
@@ -63,7 +76,7 @@ export const BillingPage = () => {
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-1.5 text-p1 text-content-secondary">
               <span>Estimated next payment</span>
-              <IconInformation size={16} className="text-content-tertiary" />
+              <InfoIcon size={16} className="text-content-tertiary" tooltip="This is an estimate based on your current plans and seats. Final amount may vary." />
             </div>
             <div className="flex items-baseline gap-2">
               <span className="text-h2 font-semibold text-content">
@@ -93,7 +106,7 @@ export const BillingPage = () => {
                   <th className="text-right text-p2 font-semibold uppercase text-content-tertiary py-2.5 pr-4">
                     <span className="inline-flex items-center gap-1">
                       Price Estimate
-                      <IconInformation size={14} className="text-content-tertiary" />
+                      <InfoIcon size={14} className="text-content-tertiary" tooltip="Final price might change based on usage" />
                     </span>
                   </th>
                   <th className="w-10 py-2.5" />
@@ -150,7 +163,7 @@ export const BillingPage = () => {
                       {isTrial ? 'Seats' : (
                         <span className="inline-flex items-center gap-1">
                           Billed Seats
-                          <IconInformation size={14} className="text-content-tertiary" />
+                          <InfoIcon size={14} className="text-content-tertiary" tooltip="Members with seats in Toggl Track and Toggl Focus are only billed once" />
                         </span>
                       )}
                     </th>
@@ -158,7 +171,7 @@ export const BillingPage = () => {
                     <th className="text-right text-p2 font-semibold uppercase text-content-tertiary py-2.5 pr-4">
                       <span className="inline-flex items-center gap-1 justify-end">
                         Price Estimate
-                        <IconInformation size={14} className="text-content-tertiary" />
+                        <InfoIcon size={14} className="text-content-tertiary" tooltip="Final price might change based on usage" />
                       </span>
                     </th>
                     <th className="w-10 py-2.5" />
