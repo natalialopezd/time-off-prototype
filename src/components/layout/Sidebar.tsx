@@ -4,6 +4,7 @@ import {
   IconKey, IconCreditCard, IconChart, IconQuestion, IconCollapse,
   TrackLogo, FocusLogo, WorkLogo,
 } from '../icons'
+import { useModuleState } from '../../store/moduleState'
 
 const TogglLogo = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
@@ -20,19 +21,24 @@ type NavItem = {
   enabled: boolean
 }
 
-const navItems: NavItem[] = [
-  { label: 'Organization', path: '/overview', icon: IconOrganization, enabled: true },
-  { label: 'Members', path: '/members', icon: IconUsers, enabled: true },
-  { label: 'Integrations', icon: IconIntegrations, badge: 'New', enabled: false },
-  { label: 'Teams', icon: IconTeam, enabled: false },
-  { label: 'Single Sign-On', icon: IconKey, enabled: false },
-  { label: 'Billing', icon: IconCreditCard, enabled: false },
-  { label: 'Explore Plans', icon: IconChart, enabled: false },
-]
+function useNavItems(): NavItem[] {
+  const { state } = useModuleState()
+  const billingEnabled = state.status === 'active'
+  return [
+    { label: 'Organization', path: '/overview', icon: IconOrganization, enabled: true },
+    { label: 'Members', path: '/members', icon: IconUsers, enabled: true },
+    { label: 'Integrations', icon: IconIntegrations, badge: 'New', enabled: false },
+    { label: 'Teams', icon: IconTeam, enabled: false },
+    { label: 'Single Sign-On', icon: IconKey, enabled: false },
+    { label: 'Billing', path: '/billing', icon: IconCreditCard, enabled: billingEnabled },
+    { label: 'Explore Plans', icon: IconChart, enabled: false },
+  ]
+}
 
 export const Sidebar = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const navItems = useNavItems()
 
   return (
     <div className="flex h-full">

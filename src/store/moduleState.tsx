@@ -4,7 +4,7 @@ export type ModuleStatus = 'upsell' | 'trial-active' | 'active' | 'cancelled' | 
 
 export type ModuleAction =
   | { type: 'START_TRIAL' }
-  | { type: 'ACTIVATE' }
+  | { type: 'ACTIVATE'; subscribedMemberCount?: number }
   | { type: 'CANCEL' }
   | { type: 'DISABLE' }
   | { type: 'RE_ENABLE' }
@@ -14,6 +14,7 @@ export type ModuleState = {
   status: ModuleStatus
   trialDaysRemaining: number | null
   cancelsOn: string | null
+  subscribedMemberCount: number | null
 }
 
 function createInitialState(status: ModuleStatus = 'upsell'): ModuleState {
@@ -21,6 +22,7 @@ function createInitialState(status: ModuleStatus = 'upsell'): ModuleState {
     status,
     trialDaysRemaining: status === 'trial-active' ? 5 : null,
     cancelsOn: null,
+    subscribedMemberCount: status === 'active' ? 10 : null,
   }
 }
 
@@ -28,19 +30,19 @@ function moduleReducer(state: ModuleState, action: ModuleAction): ModuleState {
   switch (action.type) {
     case 'START_TRIAL':
       if (state.status !== 'upsell') return state
-      return { status: 'trial-active', trialDaysRemaining: 30, cancelsOn: null }
+      return { status: 'trial-active', trialDaysRemaining: 30, cancelsOn: null, subscribedMemberCount: null }
     case 'ACTIVATE':
       if (state.status !== 'trial-active' && state.status !== 'cancelled') return state
-      return { status: 'active', trialDaysRemaining: null, cancelsOn: null }
+      return { status: 'active', trialDaysRemaining: null, cancelsOn: null, subscribedMemberCount: action.subscribedMemberCount ?? state.subscribedMemberCount ?? 10 }
     case 'CANCEL':
       if (state.status !== 'active') return state
-      return { status: 'cancelled', trialDaysRemaining: null, cancelsOn: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString() }
+      return { status: 'cancelled', trialDaysRemaining: null, cancelsOn: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), subscribedMemberCount: state.subscribedMemberCount }
     case 'DISABLE':
       if (state.status !== 'trial-active' && state.status !== 'active') return state
-      return { status: 'disabled', trialDaysRemaining: null, cancelsOn: null }
+      return { status: 'disabled', trialDaysRemaining: null, cancelsOn: null, subscribedMemberCount: null }
     case 'RE_ENABLE':
       if (state.status !== 'disabled') return state
-      return { status: 'upsell', trialDaysRemaining: null, cancelsOn: null }
+      return { status: 'upsell', trialDaysRemaining: null, cancelsOn: null, subscribedMemberCount: null }
     case 'RESET':
       return createInitialState(action.initialStatus ?? 'upsell')
     default:

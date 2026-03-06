@@ -10,7 +10,7 @@ export const Switch = ({ checked, onCheckedChange }: SwitchProps) => (
     aria-checked={checked}
     onClick={() => onCheckedChange(!checked)}
     className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full transition-colors ${
-      checked ? 'bg-accent' : 'bg-tertiary'
+      checked ? 'bg-accent' : 'bg-surface-tertiary'
     }`}
   >
     <span

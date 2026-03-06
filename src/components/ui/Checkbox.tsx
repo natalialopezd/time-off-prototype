@@ -20,7 +20,7 @@ export const Checkbox = ({ checked, onChange, disabled, ...props }: CheckboxProp
       className={`size-5 rounded border-2 flex items-center justify-center transition-colors shrink-0 ${
         isChecked || isIndeterminate
           ? 'bg-accent border-accent text-on-accent'
-          : 'border-tertiary bg-primary hover:border-secondary'
+          : 'border-tertiary bg-surface hover:border-edge-secondary'
       } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
     >
       {isChecked && (

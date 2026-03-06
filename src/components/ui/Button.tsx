@@ -9,8 +9,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: 'bg-accent text-on-accent hover:bg-accent-hover',
-  secondary: 'bg-secondary text-primary border border-primary hover:bg-tertiary',
-  tertiary: 'text-secondary hover:text-primary hover:bg-secondary',
+  secondary: 'bg-surface-secondary text-content border border-edge hover:bg-surface-tertiary',
+  tertiary: 'text-content-secondary hover:text-content hover:bg-surface-secondary',
   destructive: 'bg-destructive text-on-accent hover:bg-destructive-hover',
   lowkey: 'text-accent hover:underline text-p2 font-semibold px-0 py-0',
 }

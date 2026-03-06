@@ -34,11 +34,11 @@ export const Dialog = ({ open, onOpenChange, title, children, width = 480 }: Dia
       onClick={(e) => { if (e.target === overlayRef.current) onOpenChange(false) }}
     >
       <div
-        className="bg-primary rounded-xl shadow-xl max-h-[90vh] overflow-y-auto"
+        className="bg-surface rounded-xl shadow-xl max-h-[90vh] overflow-y-auto"
         style={{ width: `${width}px`, maxWidth: 'calc(100vw - 32px)' }}
       >
         <div className="p-6 flex flex-col gap-5">
-          <h2 className="text-h3 font-semibold text-primary">{title}</h2>
+          <h2 className="text-h3 font-semibold text-content">{title}</h2>
           {children}
         </div>
       </div>

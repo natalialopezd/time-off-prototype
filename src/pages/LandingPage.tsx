@@ -26,18 +26,18 @@ export const LandingPage = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-secondary flex items-center justify-center p-8">
+    <div className="min-h-screen bg-surface-secondary flex items-center justify-center p-8">
       <div className="max-w-[800px] w-full">
         <div className="text-center mb-10">
-          <h1 className="text-h1 font-bold text-primary mb-3">Time Off Module -- User Testing</h1>
-          <p className="text-p1 text-secondary">Select a task to begin. Each task simulates a different admin workflow.</p>
+          <h1 className="text-h1 font-bold text-content mb-3">Time Off Module -- User Testing</h1>
+          <p className="text-p1 text-content-secondary">Select a task to begin. Each task simulates a different admin workflow.</p>
         </div>
         <div className="flex flex-col gap-4">
           {tasks.map(task => (
-            <div key={task.id} className="bg-primary rounded-xl border border-primary p-6 flex items-center justify-between gap-6">
+            <div key={task.id} className="bg-surface rounded-xl border border-edge p-6 flex items-center justify-between gap-6">
               <div className="flex-1">
-                <h2 className="text-h4 font-semibold text-primary mb-2">{task.title}</h2>
-                <p className="text-p1 text-secondary">{task.description}</p>
+                <h2 className="text-h4 font-semibold text-content mb-2">{task.title}</h2>
+                <p className="text-p1 text-content-secondary">{task.description}</p>
               </div>
               <Button onClick={() => navigate(task.path)}>Start</Button>
             </div>

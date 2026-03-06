@@ -29,7 +29,7 @@ export const Dropdown = ({ trigger, children, open: controlledOpen, onOpenChange
       <div onClick={() => setIsOpen(!isOpen)}>{trigger}</div>
       {isOpen && (
         <div
-          className="absolute right-0 top-full mt-2 z-50 bg-primary rounded-lg shadow-xl border border-primary overflow-hidden"
+          className="absolute right-0 top-full mt-2 z-50 bg-surface rounded-lg shadow-xl border border-edge overflow-hidden"
           style={{ width }}
         >
           {children}

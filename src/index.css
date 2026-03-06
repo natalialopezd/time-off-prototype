@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* Typography scale */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-size-h1: 1.75rem;
   --font-size-h2: 1.5rem;
@@ -12,38 +11,37 @@
   --font-size-p1: 0.875rem;
   --font-size-p2: 0.75rem;
 
-  /* Colors - Light mode */
-  --color-bg-primary: #FFFFFF;
-  --color-bg-secondary: #F5F5F5;
-  --color-bg-tertiary: #EBEBEB;
-  --color-bg-muted: #F0EAFC;
-  --color-bg-accent: #412A6A;
-  --color-bg-accent-hover: #5B3D94;
-  --color-bg-success: #E8F5E9;
-  --color-bg-warning: #FFF3E0;
-  --color-bg-destructive: #D32F2F;
-  --color-bg-destructive-hover: #B71C1C;
-  --color-bg-overlay: rgba(0,0,0,0.5);
-  --color-bg-sidebar: #2C1338;
-  --color-bg-sidebar-hover: #3D1F4D;
-  --color-bg-nav: #1A0A24;
+  /* Non-conflicting colors (same value for bg/text/border) */
+  --color-accent: #412A6A;
+  --color-accent-hover: #5B3D94;
+  --color-on-accent: #FFFFFF;
+  --color-destructive: #D32F2F;
+  --color-destructive-hover: #B71C1C;
+  --color-sidebar: #2C1338;
+  --color-sidebar-hover: #3D1F4D;
+  --color-nav: #1A0A24;
+  --color-on-sidebar: #FFFFFF;
+  --color-sidebar-muted: rgba(255,255,255,0.6);
+  --color-overlay: rgba(0,0,0,0.5);
+  --color-muted: #F0EAFC;
+  --color-warning: #E65100;
+  --color-success: #2E7D32;
 
-  --color-text-primary: #1A1A1A;
-  --color-text-secondary: #666666;
-  --color-text-tertiary: #999999;
-  --color-text-accent: #412A6A;
-  --color-text-accent-hover: #5B3D94;
-  --color-text-on-accent: #FFFFFF;
-  --color-text-success: #2E7D32;
-  --color-text-warning: #E65100;
-  --color-text-destructive: #D32F2F;
-  --color-text-on-sidebar: #FFFFFF;
-  --color-text-sidebar-muted: rgba(255,255,255,0.6);
+  /* Surface colors (backgrounds) */
+  --color-surface: #FFFFFF;
+  --color-surface-secondary: #F5F5F5;
+  --color-surface-tertiary: #EBEBEB;
 
-  --color-border-primary: #E0E0E0;
-  --color-border-secondary: #EBEBEB;
-  --color-border-accent: #412A6A;
+  /* Content colors (text) */
+  --color-content: #1A1A1A;
+  --color-content-secondary: #666666;
+  --color-content-tertiary: #999999;
 
+  /* Edge colors (borders) */
+  --color-edge: #E0E0E0;
+  --color-edge-secondary: #EBEBEB;
+
+  /* Badge colors */
   --color-badge-success-bg: #E8F5E9;
   --color-badge-success-text: #2E7D32;
   --color-badge-warning-bg: #FFF3E0;
@@ -54,7 +52,6 @@
   --color-badge-default-text: #412A6A;
 }
 
-/* Base styles */
 html, body, #root {
   height: 100%;
   margin: 0;
@@ -63,8 +60,8 @@ html, body, #root {
 
 body {
   font-family: var(--font-sans);
-  color: var(--color-text-primary);
-  background: var(--color-bg-secondary);
+  color: var(--color-content);
+  background: var(--color-surface-secondary);
   -webkit-font-smoothing: antialiased;
 }
 

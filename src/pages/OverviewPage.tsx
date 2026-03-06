@@ -179,8 +179,8 @@ export const OverviewPage = () => {
     setShowBuyNowDialog(false)
     setShowSubscribeDialog(true)
   }
-  const handleSubscribe = () => {
-    dispatch({ type: 'ACTIVATE' })
+  const handleSubscribe = (memberCount: number) => {
+    dispatch({ type: 'ACTIVATE', subscribedMemberCount: memberCount })
     setShowSubscribeDialog(false)
     setShowEnabledDialog(true)
   }

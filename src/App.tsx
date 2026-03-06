@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, Navigate, useSearchParams } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate, Outlet, useSearchParams } from 'react-router-dom'
 import { ToastProvider } from './components/ui/Toast'
 import { ModuleProvider } from './store/moduleState'
 import { AccessProvider } from './store/accessStore'
@@ -6,6 +6,7 @@ import { Shell } from './components/layout/Shell'
 import { LandingPage } from './pages/LandingPage'
 import { OverviewPage } from './pages/OverviewPage'
 import { MembersPage } from './pages/MembersPage'
+import { BillingPage } from './pages/BillingPage'
 import type { ReactNode } from 'react'
 
 function TaskRedirect() {
@@ -20,11 +21,11 @@ function WithShell({ children }: { children: ReactNode }) {
   return <Shell>{children}</Shell>
 }
 
-function OverviewRoute() {
+function Task1Layout() {
   return (
     <ModuleProvider initialStatus="trial-active">
       <AccessProvider>
-        <WithShell><OverviewPage /></WithShell>
+        <WithShell><Outlet /></WithShell>
       </AccessProvider>
     </ModuleProvider>
   )
@@ -46,7 +47,10 @@ export default function App() {
       <ToastProvider>
         <Routes>
           <Route path="/" element={<TaskRedirect />} />
-          <Route path="/overview" element={<OverviewRoute />} />
+          <Route element={<Task1Layout />}>
+            <Route path="/overview" element={<OverviewPage />} />
+            <Route path="/billing" element={<BillingPage />} />
+          </Route>
           <Route path="/members" element={<MembersRoute />} />
         </Routes>
       </ToastProvider>
