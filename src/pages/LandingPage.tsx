@@ -4,20 +4,20 @@ import { Button } from '../components/ui/Button'
 const tasks = [
   {
     id: 1,
-    title: 'Task 1: Convert trial to paid',
-    description: 'You are the admin of an organization that has been trialing the Time Off module. Your trial is ending in 5 days. Subscribe to keep Time Off for your team.',
+    title: 'Task 1: Subscribe to Time Off',
+    description: 'You\u2019re an admin at a company using Toggl. Your team has been trialing the Time Off module for the past 25 days. Your trial is ending soon \u2014 subscribe to keep access for your team.',
     path: '/overview',
   },
   {
     id: 2,
-    title: 'Task 2: Add a single user',
-    description: 'Your organization has Time Off active. One of your team members, Sarah Chen, doesn\'t have access yet. Give her access to Time Off.',
+    title: 'Task 2: Give a team member access',
+    description: 'You\u2019ve subscribed to Time Off. A new person has joined your team and needs access. Add them to the module.',
     path: '/members',
   },
   {
     id: 3,
-    title: 'Task 3: Bulk add/remove users',
-    description: 'You need to give Time Off access to multiple team members at once. Select several users and manage their module access in bulk.',
+    title: 'Task 3: Manage access for multiple users',
+    description: 'Your team is growing and several people need Time Off access. Find a way to add multiple users to the module at once.',
     path: '/members',
   },
 ]
@@ -29,7 +29,7 @@ export const LandingPage = () => {
     <div className="min-h-screen bg-surface-secondary flex items-center justify-center p-8">
       <div className="max-w-[800px] w-full">
         <div className="text-center mb-10">
-          <h1 className="text-h1 font-bold text-content mb-3">Time Off Module -- User Testing</h1>
+          <h1 className="text-h1 font-bold text-content mb-3">Time Off Module — User Testing</h1>
           <p className="text-p1 text-content-secondary">Select a task to begin. Each task simulates a different admin workflow.</p>
         </div>
         <div className="flex flex-col gap-4">
