@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { Checkbox } from '../components/ui/Checkbox'
@@ -7,12 +7,71 @@ import { useModuleState } from '../store/moduleState'
 import { MEMBERS, TEAMS } from '../data/members'
 import { EditUserDialog } from '../components/members/EditUserDialog'
 import { ModuleSelectionPopover } from '../components/members/ModuleSelectionPopover'
+import { IconThreeDots, IconPencil, IconTrash } from '../components/icons'
 
 const Avatar = ({ name }: { name: string }) => {
   const initials = name.split(' ').map(n => n[0]).join('').slice(0, 2)
   return (
     <div className="size-8 rounded-full bg-accent text-on-accent flex items-center justify-center text-[11px] font-semibold shrink-0">
       {initials}
+    </div>
+  )
+}
+
+const RowMenu = ({ onEdit }: { onEdit: () => void }) => {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [open])
+
+  return (
+    <div ref={ref} className="relative inline-block">
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation()
+          setOpen(!open)
+        }}
+        className="p-1.5 rounded-md hover:bg-surface-secondary transition-colors text-content-secondary hover:text-content"
+      >
+        <IconThreeDots size={16} />
+      </button>
+      {open && (
+        <div className="absolute right-0 top-full mt-1 z-50 bg-surface rounded-lg shadow-xl border border-edge overflow-hidden w-[160px]">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              setOpen(false)
+              onEdit()
+            }}
+            className="w-full text-left px-3 py-2 text-p1 text-content hover:bg-surface-secondary transition-colors flex items-center gap-2"
+          >
+            <IconPencil size={14} className="text-content-secondary" />
+            Edit
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              setOpen(false)
+            }}
+            className="w-full text-left px-3 py-2 text-p1 text-destructive hover:bg-surface-secondary transition-colors flex items-center gap-2"
+          >
+            <IconTrash size={14} />
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   )
 }
@@ -107,6 +166,7 @@ export const MembersPage = () => {
               {isModuleVisible && (
                 <th className="text-left text-p2 font-semibold uppercase tracking-wide text-content-tertiary px-4 py-3">Time Off</th>
               )}
+              <th className="w-12 px-4 py-3" />
             </tr>
           </thead>
           <tbody>
@@ -116,10 +176,9 @@ export const MembersPage = () => {
               return (
                 <tr
                   key={member.id}
-                  className="border-b border-edge-secondary last:border-b-0 hover:bg-surface-secondary cursor-pointer transition-colors"
-                  onClick={() => setEditingUser(member)}
+                  className="border-b border-edge-secondary last:border-b-0 hover:bg-surface-secondary transition-colors"
                 >
-                  <td className="w-12 px-4 py-3" onClick={e => e.stopPropagation()}>
+                  <td className="w-12 px-4 py-3">
                     <Checkbox checked={isSelected} onChange={() => toggleOne(member.id)} />
                   </td>
                   <td className="px-4 py-3">
@@ -146,6 +205,9 @@ export const MembersPage = () => {
                       )}
                     </td>
                   )}
+                  <td className="w-12 px-4 py-3">
+                    <RowMenu onEdit={() => setEditingUser(member)} />
+                  </td>
                 </tr>
               )
             })}

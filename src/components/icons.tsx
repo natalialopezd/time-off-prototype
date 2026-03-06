@@ -158,3 +158,38 @@ export const IconCollapse = ({ size = 16, className, ...props }: IconProps) => (
     <path d="M10 4L6 8l4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 )
+
+export const IconSearch = ({ size = 16, className, ...props }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={className} {...props}>
+    <circle cx="7" cy="7" r="4.5" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M10.5 10.5L14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+)
+
+export const IconAllTools = ({ size = 16, className, ...props }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={className} {...props}>
+    <rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.3" />
+    <rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.3" />
+    <rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.3" />
+    <rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.3" />
+  </svg>
+)
+
+export const IconDollar = ({ size = 16, className, ...props }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={className} {...props}>
+    <path d="M8 1v14M11 4.5H6.5a2 2 0 000 4h3a2 2 0 010 4H5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
+export const IconClock = ({ size = 16, className, ...props }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={className} {...props}>
+    <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M8 4.5V8l2.5 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
+export const IconTrash = ({ size = 16, className, ...props }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={className} {...props}>
+    <path d="M2 4h12M5.333 4V2.667a1.333 1.333 0 011.334-1.334h2.666a1.333 1.333 0 011.334 1.334V4M12.667 4v9.333a1.333 1.333 0 01-1.334 1.334H4.667a1.333 1.333 0 01-1.334-1.334V4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
