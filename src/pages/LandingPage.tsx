@@ -12,13 +12,13 @@ const tasks = [
     id: 2,
     title: 'Task 2: Give a team member access',
     description: 'You\u2019ve subscribed to Time Off. A new person has joined your team and needs access. Add them to the module.',
-    path: '/members',
+    path: '/members?entry=active',
   },
   {
     id: 3,
     title: 'Task 3: Give multiple people access',
     description: 'You want to give 5 additional people in your organization access to Time Off. Go ahead and do that.',
-    path: '/members',
+    path: '/members?entry=active',
   },
 ]
 
